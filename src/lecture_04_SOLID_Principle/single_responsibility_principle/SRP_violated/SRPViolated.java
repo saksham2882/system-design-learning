@@ -1,16 +1,27 @@
-package lecture_03_SOLID_Principle.single_responsibility_principle.SRP_violated;
+package lecture_04_SOLID_Principle.single_responsibility_principle.SRP_violated;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-// Violating SRP: ShoppingCart is handling multiple responsibilities
-public class ShoppingCart {
+// Product class representing any item of any E-Commerce
+class Product {
+    public String name;
+    public double price;
 
-    private final List<Product> products;
-
-    public ShoppingCart(List<Product> products) {
-        this.products = products;
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
     }
+}
+
+
+// Violating SRP: ShoppingCart is handling multiple responsibilities
+class ShoppingCart {
+
+    private final List<Product> products = new ArrayList<>();
+
+    public ShoppingCart() {}
 
     public void addProduct(Product product) {
         products.add(product);
@@ -41,5 +52,19 @@ public class ShoppingCart {
     // 3. Violating SRP - Saves to DB (Should be in a separate class)
     public void saveToDatabase(){
         System.out.println("Saving to database...");
+    }
+}
+
+
+public class SRPViolated {
+    static void main() {
+
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addProduct(new Product("Laptop", 1000.00));
+        cart.addProduct(new Product("Tablet", 400.00));
+
+        cart.printInvoice();
+        cart.saveToDatabase();
     }
 }
