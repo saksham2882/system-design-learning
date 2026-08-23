@@ -1,0 +1,4 @@
+Hello World!
+This is a text document.
+	This is another text after a tab space.
+[Image: picture.png]
